@@ -344,11 +344,11 @@ namespace ClauParser_sharp
 		}
 
 
-		private static void Scanning(string text, in long length,
+		private static void Scanning(string text, in int length,
 			out long[] _token_arr, out long _token_arr_size)
 		{
 
-			long[] token_arr = new long[length + 1];
+			long[] token_arr = new long[length];
 			long token_arr_size = 0;
 
 			{
@@ -359,7 +359,7 @@ namespace ClauParser_sharp
 
 				int token_arr_count = 0;
 
-				for (int i = 0; i <= length; ++i)
+				for (int i = 0; i < length; ++i)
 				{
 					char ch = text[i];
 
@@ -472,11 +472,21 @@ namespace ClauParser_sharp
 					}
 				}
 
-				token_arr_size = token_arr_count;
+				
 				if (state == 3)
 				{
 					state = 0;
+
+					token_first = length;
+					token_last = length;
 				}
+				
+				if (length - 1 - token_first + 1 > 0)
+				{
+					token_arr[token_arr_count] = Utility.Get(token_first, length - 1 - token_first + 1, text[token_first]);
+					token_arr_count++;
+				}
+				token_arr_size = token_arr_count;
 
 				if (0 != state)
 				{
