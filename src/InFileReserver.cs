@@ -187,7 +187,7 @@ namespace ClauParser_sharp
 		}
 
 		private static void ScanningNew(string text, in int length, in int thr_num,
-			out long[] _token_arr, out long _token_arr_size)
+			out long[] _token_arr, out int _token_arr_size)
 		{
 			Thread[] thr = new Thread[thr_num];
 
@@ -226,10 +226,10 @@ namespace ClauParser_sharp
 				}
 				last[thr_num - 1] = length;
 			}
-			long real_token_arr_count = 0;
+			int real_token_arr_count = 0;
 
 			long[] tokens = new long[length + 1];
-			long token_count = 0;
+			int token_count = 0;
 
 			long[] token_arr_size = new long[thr_num];
 
@@ -345,11 +345,11 @@ namespace ClauParser_sharp
 
 
 		private static void Scanning(string text, in int length,
-			out long[] _token_arr, out long _token_arr_size)
+			out long[] _token_arr, out int _token_arr_size)
 		{
 
 			long[] token_arr = new long[length];
-			long token_arr_size = 0;
+			int token_arr_size = 0;
 
 			{
 				int state = 0;
@@ -502,7 +502,7 @@ namespace ClauParser_sharp
 
 
 		static KeyValuePair<bool, int> Scan(in String fileName, int thr_num,
-			out string _buffer, out long _buffer_len, out long[] _token_arr, out long _token_arr_len)
+			out string _buffer, out int _buffer_len, out long[] _token_arr, out int _token_arr_len)
 		{
 			if (!File.Exists(fileName))
 			{
@@ -523,7 +523,7 @@ namespace ClauParser_sharp
 				{
 					//int a = clock();
 					long[] token_arr;
-					long token_arr_size;
+					int token_arr_size;
 
 					if (thr_num == 1)
 					{
@@ -551,7 +551,7 @@ namespace ClauParser_sharp
 		{
 			file = _fileName;
 		}
-		public bool Run(int thr_num, out string buffer, out long buffer_len, out long[] token_arr, out long token_arr_len)
+		public bool Run(int thr_num, out string buffer, out int buffer_len, out long[] token_arr, out int token_arr_len)
 		{
 			bool x = Scan(file, thr_num, out buffer, out buffer_len, out token_arr, out token_arr_len).Value > 0;
 			return x;
