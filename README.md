@@ -1,2 +1,2 @@
 # ClauParser-CS
-C# support of ClauParser
+C# support(or version?) of ClauParser
